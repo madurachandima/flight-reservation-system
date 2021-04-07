@@ -1,4 +1,4 @@
-package com.madura.flight.reservation.system.entitie;
+package com.madura.flight.reservation.system.entities;
 
 import javax.persistence.Entity;
 import java.sql.Date;
