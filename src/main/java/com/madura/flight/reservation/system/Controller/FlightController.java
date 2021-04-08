@@ -9,7 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 @Controller
 public class FlightController {
@@ -19,8 +25,17 @@ public class FlightController {
     @RequestMapping(value = "findFlights", method = RequestMethod.POST)
     public String findFlight(@RequestParam("from") String from, @RequestParam("to") String to,
                              @RequestParam("departureDate") String departureDate, ModelMap modelMap) {
-        List<Flight> flightList = flightRepository.findFlights(from, to, departureDate);
-        modelMap.addAttribute("flights", flightList);
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+
+        try {
+            Date date = dateFormat.parse(departureDate);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            List<Flight> flightList = flightRepository.findFlights(from, to, sqlDate);
+    modelMap.addAttribute("flights", flightList);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         return "displayFlight";
     }
