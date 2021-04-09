@@ -15,17 +15,17 @@
 <body>
 <h3>Complete Reservation</h3>
 AirLine : ${flight.operatingAirline}<br/>
-AirLine : ${flight.departureCity}<br/>
-AirLine : ${flight.arrivalCity}<br/>
+Departure City : ${flight.departureCity}<br/>
+Arrival City : ${flight.arrivalCity}<br/>
 
 <form action="completeReservation" method="post">
     <pre>
         <h2>Passenger Details</h2>
 
          First Name : <input type="text" name="passengerFirstName"/>
-         Last Name : <input type="text" name="passengerFirstName"/>
-         Email : <input type="text" name="passengerFirstName"/>
-         Phone Number : <input type="text" name="passengerFirstName"/>
+         Last Name : <input type="text" name="passengerLastName"/>
+         Email : <input type="text" name="passengerEmail"/>
+         Phone Number : <input type="text" name="passengerPhoneNumber"/>
 
          <h2>Card Details</h2>
 

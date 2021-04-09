@@ -32,11 +32,10 @@ public class FlightController {
             Date date = dateFormat.parse(departureDate);
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             List<Flight> flightList = flightRepository.findFlights(from, to, sqlDate);
-    modelMap.addAttribute("flights", flightList);
+            modelMap.addAttribute("flights", flightList);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return "displayFlight";
     }
 }
