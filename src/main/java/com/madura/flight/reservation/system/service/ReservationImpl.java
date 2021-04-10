@@ -8,7 +8,9 @@ import com.madura.flight.reservation.system.entities.Flight;
 import com.madura.flight.reservation.system.entities.Passenger;
 import com.madura.flight.reservation.system.entities.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReservationImpl implements ReservationService {
     @Autowired
     FlightRepository flightRepository;
@@ -16,11 +18,13 @@ public class ReservationImpl implements ReservationService {
     @Autowired
     PassengerRepository passengerRepository;
 
+
     @Autowired
     ReservationRepository reservationRepository;
 
     @Override
     public Reservation bookFlight(ReservationRequest request) {
+
         Long flightId = request.getFlightId();
         Flight flight = flightRepository.getOne(flightId);
 
@@ -37,7 +41,7 @@ public class ReservationImpl implements ReservationService {
         reservation.setCheckedIn(false);
 
         Reservation savedReservation = reservationRepository.save(reservation);
-        
+
         return savedReservation;
     }
 }
